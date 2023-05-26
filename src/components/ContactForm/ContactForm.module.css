@@ -1,0 +1,30 @@
+.contactsForm {
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 4px;
+    background-color: lightcyan;
+}
+
+.contactData {
+    margin: 5px 0;
+}
+
+.inputData {
+    margin-bottom: 5px;
+}
+
+.addBtn {
+    font-size: 16px;
+    color: aliceblue;
+    padding: 4px;
+    border: none;
+    border-radius: 4px;
+    background-color: lightseagreen;
+    box-shadow: 1px 1px 2px 1px gray;
+    cursor: pointer;
+}
+
+.addBtn:hover {
+    color: black;
+    background-color: lightskyblue;
+}
