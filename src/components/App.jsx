@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { nanoid } from 'nanoid';
 import ContactForm from './ContactForm';
 import ContactList from './ContactList';
+import Filter from './Filter';
 import css from './App.module.css';
 
 class App extends Component {
@@ -14,30 +16,51 @@ class App extends Component {
     filter: '',
   };
 
-  setFilter = e => {
-    this.state({ filter: e.target.value });
+  // isContactExist = contactName =>
+  //   this.state.contacts.some(
+  //     contact => contact.name.toLowerCase() === contactName.toLowerCase()
+  //   );
+
+  addContact = newContact => {
+    this.setState(prevState => {
+      return {
+        contacts: [{ id: nanoid(), ...newContact }, ...prevState.contacts],
+      };
+    });
   };
 
-  deleteContact = e => {
+  setFilter = e => {
+    this.setState({ filter: e.target.value });
+  };
+
+  // filteredContacts = () => {
+  //   const { filter, contacts } = this.state;
+
+  //   const notmalizedFilter = filter.toLowerCase();
+
+  //   return contacts.filter(contact =>
+  //     contact.name.toLowerCase().includes(notmalizedFilter)
+  //   );
+  // };
+
+  deleteContact = contactId => {
     this.setState(prevState => ({
-      contacts: prevState.contacts.filter(
-        contact => contact.id !== e.target.id
-      ),
+      contacts: prevState.contacts.filter(contact => contact.id !== contactId),
     }));
   };
 
   render() {
-    const { contacts } = this.state;
+    const { contacts, filter } = this.state;
 
     return (
       <div className={css.Container}>
         <h1>Phonebook</h1>
-
-        <ContactForm />
-
+        <ContactForm
+          onSubmit={this.addContact}
+          isContactExist={this.isContactExist}
+        />
         <h2>Contacts</h2>
-        <input className="inputSearchContact"></input>
-
+        <Filter value={filter} onChange={this.setFilter} />
         <ContactList contacts={contacts} deleteContact={this.deleteContact} />
       </div>
     );
