@@ -1,4 +1,5 @@
 import React from 'react';
+import css from './Filter.module.css';
 
 const Filter = ({ value, onChange }) => {
   return (
@@ -9,6 +10,7 @@ const Filter = ({ value, onChange }) => {
         name="filter"
         onChange={onChange}
         value={value}
+        className={css.inputFilter}
       ></input>
     </label>
   );
